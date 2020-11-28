@@ -4,14 +4,14 @@ import api from './api'
 import generateForm from './generateForm'
 
 const generateItemElement = function (item) {
-  let itemTitle = `<h3 class="bookmark-item bookmark-item__checked">${item.title}</h3>`;
-  let bookmarkRating = `<p class="bookmark-item bookmark-item__checked">${item.rating}/5</p>`
+  let itemTitle = `<span class="bookmark-item bookmark-item__checked">${item.title}</span>`;
+  let bookmarkRating = `<span class="bookmark-item bookmark-item__checked">${item.rating}/5</span>`
   let bookmarkDescription = `<p>${item.desc}</p><a href="url">${item.url}</a>`
   return `
     <li class="js-item-element" data-item-id="${item.id}">
       ${itemTitle}
       ${bookmarkRating}
-      <div class="hidden description">${bookmarkDescription}</div>
+      <div class="hidden description${item.id}">${bookmarkDescription}</div>
       <div class="bookmark-item-controls">
         ${generateForm.generateButton('Description', 'description-toggle', 'js-description-toggle')}
         ${generateForm.generateButton('Delete', 'bookmark-item-delete', 'js-item-delete')}
@@ -63,6 +63,27 @@ const render = function () {
   $('.js-bookmark-list').html(bookmarkListItemsString);
 };
 
+const handleNewBookmark = function() {
+  $('.newBookmark').click(evt => {
+    $(evt.currentTarget).toggleClass('hidden')
+    console.log('clicked')
+    $('.form').html(`
+      <form id="js-bookmark-list-form">
+        <div class="form1>
+          ${generateForm.generateTextField('Bookmark Title: ', 'bookmark-entry', 'e.g., Google')}
+          ${generateForm.generateTextField('Bookmark URL: ', 'bookmark-url', 'e.g. https://www.google.com')}
+        </div>
+        <div class="form2">
+          ${generateForm.generateTextField('Bookmark Description: ', 'bookmark-description', 'e.g. Favorite site')}
+          ${generateForm.generateNumberOption('Bookmark rating: ', 'bookmark-rating')}
+        </div>
+          <button class="submit" type="submit">Add bookmark</button>
+      </form>
+    `)
+    render()
+  })
+}
+
 const handleNewItemSubmit = function () {
   $('.form').submit(function (event) {
     event.preventDefault();
@@ -113,26 +134,10 @@ const handleDeleteItemClicked = function () {
 
 const handleDescription = function() {
   $('.js-bookmark-list').on('click', '.description-toggle', event => {
-    console.log('clicked')
-    $('.description').toggleClass('hidden')
+    const id = getItemIdFromElement(event.currentTarget)
+    $(`.description${id}`).toggleClass('hidden')
   })
 }
-
-const handleItemCheckClicked = function () {
-  $('.js-bookmark-list').on('click', '.js-item-toggle', event => {
-    const id = getItemIdFromElement(event.currentTarget);
-    const item = store.findById(id)
-    api.updateItem(id, {checked: !item.checked})
-    .then(() => {
-      store.findAndUpdate(id, {checked: !item.checked})
-      render()
-    })
-    .catch((error) => {
-      store.setError(error.message)
-      renderError()
-    })
-  });
-};
 
 const handleFilter = function() {
   $( "#rating-filter" ).change(function() {
@@ -142,8 +147,8 @@ const handleFilter = function() {
 }
 
 const bindEventListeners = function () {
+  handleNewBookmark();
   handleNewItemSubmit();
-  handleItemCheckClicked();
   handleDeleteItemClicked();
   handleDescription();
   handleCloseError()

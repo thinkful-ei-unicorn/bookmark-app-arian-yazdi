@@ -10,20 +10,16 @@ let generateTextField = (label, id, placeholder) => {
         textField = `<input type="text" id="${id}" name="${id}" required>`;
     }
    return `
-   <div class = "fieldClass">
    <label for="${id}">${label} </label>
    ${textField}
-   </div>
    `
 }
 
 let generateNumberOption = (label, id) => {
     let numberOption = `<input type="number" id="${id}" name="${id}" min="1" max="5" required>`;
    return `
-   <div class = "fieldClass">
    <label for="${id}">${label} </label>
    ${numberOption}
-   </div>
    `
 }
 
