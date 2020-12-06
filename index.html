@@ -1,36 +1,18 @@
-Html Webpack Plugin:
-<pre>
-  Error: html-webpack-plugin could not minify the generated output.
-  In production mode the html minifcation is enabled by default.
-  If you are not generating a valid html output please disable it manually.
-  You can do so by adding the following setting to your HtmlWebpackPlugin config:
-  |
-  |    minify: false
-  |
-  See https://github.com/jantimon/html-webpack-plugin#options for details.
-  For parser dedicated bugs please create an issue here:
-  https://danielruf.github.io/html-minifier-terser/
-  Parse Error: <name="rating-filter" id="rating-filter"> 
-    </main> 
-  <script src="index_bundle.js"></script></body> 
-  </html>
-  
-  - htmlparser.js:244 new HTMLParser
-    [bookmark-app]/[html-minifier-terser]/src/htmlparser.js:244:13
-  
-  - htmlminifier.js:993 minify
-    [bookmark-app]/[html-minifier-terser]/src/htmlminifier.js:993:3
-  
-  - htmlminifier.js:1354 Object.exports.minify
-    [bookmark-app]/[html-minifier-terser]/src/htmlminifier.js:1354:16
-  
-  - index.js:1013 HtmlWebpackPlugin.minifyHtml
-    [bookmark-app]/[html-webpack-plugin]/index.js:1013:46
-  
-  - index.js:429 HtmlWebpackPlugin.postProcessHtml
-    [bookmark-app]/[html-webpack-plugin]/index.js:429:40
-  
-  - index.js:254 
-    [bookmark-app]/[html-webpack-plugin]/index.js:254:25
-  
-</pre>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bookmark App</title>
+  <link rel="shortcut icon" href="#">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+
+<body>
+  <main class="page" id='page'>
+    <!-- code breaks when line below is taken away, can't figure out why. -->
+    <name="rating-filter" id="rating-filter">
+  </main>
+
+<script src="index_bundle.js"></script></body>
+
+</html>

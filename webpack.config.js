@@ -10,6 +10,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      minify: false
     })
   ],
   module: {
@@ -28,14 +29,5 @@ module.exports = {
         ]
       }
     ]
-<<<<<<< HEAD
-  },  // .... other webpack, like output, etc.
-    optimization: {
-        minimize: false
-    },
-};
-=======
   }
 };
-minify: false
->>>>>>> 0cc67a94cdf543f79f91ce66df51d93f4c4a6713
