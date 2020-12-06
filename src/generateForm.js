@@ -10,7 +10,7 @@ let generateTextField = (label, id, placeholder) => {
         textField = `<input type="text" id="${id}" name="${id}" required>`;
     }
    return `
-   <label for="${id}">${label} </label>
+   <label for="${id}">${label}</label>
    ${textField}
    `
 }

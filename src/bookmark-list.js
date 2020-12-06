@@ -49,6 +49,30 @@ const handleCloseError = function () {
   });
 };
 
+const renderPage = function() {
+  $('#page').html(`
+    <div class="container">
+      <h1>Bookmarks</h1>
+      <div class="error-container">text</div>
+      <button class='newBookmark'>New Bookmark</button>
+      <div class="form"></div>
+      <div>
+        <label for="rating-filter">Choose Rating:</label>
+        <select name="rating-filter" id="rating-filter">
+          <option value="0">all</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <ul class="bookmark-list js-bookmark-list">
+      </ul>
+    </div>
+  `)
+}
+
 const render = function () {
   renderError()
   // Filter item list if store prop is true by item.checked === false
@@ -61,25 +85,37 @@ const render = function () {
 
   // insert that HTML into the DOM
   $('.js-bookmark-list').html(bookmarkListItemsString);
+  console.log(bookmarkListItemsString)
 };
+
+const renderForm = function() {
+  $('.form').html(`
+    <form id="js-bookmark-list-form">
+      <div class="form1>
+        ${generateForm.generateTextField('Bookmark Title: ', 'bookmark-entry', 'e.g., Google')}
+        ${generateForm.generateTextField('Bookmark URL: ', 'bookmark-url', 'e.g. https://www.google.com')}
+      </div>
+      <div class="form2">
+        ${generateForm.generateTextField('Bookmark Description: ', 'bookmark-description', 'e.g. Favorite site')}
+        ${generateForm.generateNumberOption('Bookmark rating: ', 'bookmark-rating')}
+      </div>
+        <button class="submit" type="submit">Add bookmark</button>
+    </form>
+  `)
+}
+
+const renderClearInput = function() {
+  $('#bookmark-entry').val('')
+  $('#bookmark-url').val('')
+  $('#bookmark-description').val('')
+  $('#bookmark-rating').val('')
+}
 
 const handleNewBookmark = function() {
   $('.newBookmark').click(evt => {
     $(evt.currentTarget).toggleClass('hidden')
     console.log('clicked')
-    $('.form').html(`
-      <form id="js-bookmark-list-form">
-        <div class="form1>
-          ${generateForm.generateTextField('Bookmark Title: ', 'bookmark-entry', 'e.g., Google')}
-          ${generateForm.generateTextField('Bookmark URL: ', 'bookmark-url', 'e.g. https://www.google.com')}
-        </div>
-        <div class="form2">
-          ${generateForm.generateTextField('Bookmark Description: ', 'bookmark-description', 'e.g. Favorite site')}
-          ${generateForm.generateNumberOption('Bookmark rating: ', 'bookmark-rating')}
-        </div>
-          <button class="submit" type="submit">Add bookmark</button>
-      </form>
-    `)
+    renderForm()
     render()
   })
 }
@@ -88,13 +124,10 @@ const handleNewItemSubmit = function () {
   $('.form').submit(function (event) {
     event.preventDefault();
     const title = $('#bookmark-entry').val();
-    $('#bookmark-entry').val('');
     const url = $('#bookmark-url').val();
-    $('#bookmark-url').val('')
     const description = $('#bookmark-description').val();
-    $('#bookmark-description').val('')
     const rating = $('#bookmark-rating').val();
-    $('#bookmark-rating').val('')
+    renderClearInput()
     api.createItem(title, url, description, rating)
       .then((newItem) => {
         store.addItem(newItem);
@@ -156,6 +189,7 @@ const bindEventListeners = function () {
 };
 // This object contains the only exposed methods from this module:
 export default {
+  renderPage,
   render,
   bindEventListeners
 };

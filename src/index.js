@@ -17,4 +17,5 @@ const main = function () {
   bookmarkList.render();
 };
 
+bookmarkList.renderPage()
 $(main);
