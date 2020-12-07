@@ -54,8 +54,7 @@ const renderPage = function() {
     <div class="container">
       <h1>Bookmarks</h1>
       <div class="error-container">text</div>
-      <button class='newBookmark'>New Bookmark</button>
-      <div class="form"></div>
+      <div class="form"><button class='newBookmark'>New Bookmark</button></div>
       <div>
         <label for="rating-filter">Choose Rating:</label>
         <select name="rating-filter" id="rating-filter">
@@ -85,13 +84,12 @@ const render = function () {
 
   // insert that HTML into the DOM
   $('.js-bookmark-list').html(bookmarkListItemsString);
-  console.log(bookmarkListItemsString)
 };
 
 const renderForm = function() {
   $('.form').html(`
     <form id="js-bookmark-list-form">
-      <div class="form1>
+      <div class="form1">
         ${generateForm.generateTextField('Bookmark Title: ', 'bookmark-entry', 'e.g., Google')}
         ${generateForm.generateTextField('Bookmark URL: ', 'bookmark-url', 'e.g. https://www.google.com')}
       </div>
@@ -127,11 +125,11 @@ const handleNewItemSubmit = function () {
     const url = $('#bookmark-url').val();
     const description = $('#bookmark-description').val();
     const rating = $('#bookmark-rating').val();
-    renderClearInput()
     api.createItem(title, url, description, rating)
       .then((newItem) => {
         store.addItem(newItem);
         render();
+        renderClearInput()
       })
       .catch((error) => {
         store.setError(error.message);

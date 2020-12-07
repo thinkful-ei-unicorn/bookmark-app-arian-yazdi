@@ -5,7 +5,7 @@ let generateForm = () => {
 let generateTextField = (label, id, placeholder) => {
     let textField =``
     if (placeholder) {
-        textField = `<input type="text" id="${id}" name="${id}" placeholder="${placeholder}"required>`;
+        textField = `<input type="text" id="${id}" name="${id}" placeholder="${placeholder}" required>`;
     }else {
         textField = `<input type="text" id="${id}" name="${id}" required>`;
     }
