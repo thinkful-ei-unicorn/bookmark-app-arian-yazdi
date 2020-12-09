@@ -8,14 +8,16 @@ import generateForm from './generateForm'
 
 
 const main = function () {
+  bookmarkList.renderPage()
   api.getItems()
   .then((items) => {
     items.forEach((item) => store.addItem(item));
     bookmarkList.render();
   })
+  
   bookmarkList.bindEventListeners();
   bookmarkList.render();
 };
 
-bookmarkList.renderPage()
+
 $(main);
