@@ -6,7 +6,8 @@ import generateForm from './generateForm'
 const generateItemElement = function (item) {
   let itemTitle = `<span class="bookmark-item bookmark-item__checked">${item.title}</span>`;
   let bookmarkRating = `<span class="bookmark-item bookmark-item__checked">${item.rating}/5</span>`
-  let bookmarkDescription = `<p>${item.desc}</p><a href="url">${item.url}</a>`
+  let bookmarkDescription = `<p>${item.desc}</p>
+    <a href="${item.url}">${item.url}</a>`
   return `
     <li class="js-item-element" data-item-id="${item.id}">
       ${itemTitle}
@@ -53,9 +54,9 @@ const renderPage = function() {
   $('#page').html(`
     <div class="container">
       <h1>Bookmarks</h1>
-      <div class="error-container">text</div>
-      <div class="form"><button class='newBookmark'>New Bookmark</button></div>
-      <div>
+      <article class="error-container">text</article>
+      <article class="form"><button class='newBookmark'>New Bookmark</button></article>
+      <div class='rating-select'>
         <label for="rating-filter">Choose Rating:</label>
         <select name="rating-filter" id="rating-filter">
           <option value="0">all</option>
@@ -66,8 +67,10 @@ const renderPage = function() {
           <option value="5">5</option>
         </select>
       </div>
-      <ul class="bookmark-list js-bookmark-list">
-      </ul>
+      <section class='bookmarks'>
+        <ul class="bookmark-list js-bookmark-list">
+        </ul>
+      </section>
     </div>
   `)
 }
@@ -79,26 +82,30 @@ const render = function () {
   let filtered = items.filter(item => {
       return item.rating >= store.filter
     })
+  console.log(store.filter)
   // render the bookmark list in the DOM
   const bookmarkListItemsString = generateBookmarkItemsString(filtered);
 
   // insert that HTML into the DOM
+  
   $('.js-bookmark-list').html(bookmarkListItemsString);
 };
 
 const renderForm = function() {
   $('.form').html(`
-    <form id="js-bookmark-list-form">
-      <div class="form1">
-        ${generateForm.generateTextField('Bookmark Title: ', 'bookmark-entry', 'e.g., Google')}
-        ${generateForm.generateTextField('Bookmark URL: ', 'bookmark-url', 'e.g. https://www.google.com')}
-      </div>
-      <div class="form2">
-        ${generateForm.generateTextField('Bookmark Description: ', 'bookmark-description', 'e.g. Favorite site')}
-        ${generateForm.generateNumberOption('Bookmark rating: ', 'bookmark-rating')}
-      </div>
-        <button class="submit" type="submit">Add bookmark</button>
-    </form>
+    <section class='forms'>
+      <form id="js-bookmark-list-form">
+        <section class="form1">
+          ${generateForm.generateTextField('Bookmark Title: ', 'bookmark-entry', 'e.g., Google')}
+          ${generateForm.generateTextField('Bookmark URL: ', 'bookmark-url', 'e.g. https://www.google.com')}
+        </section>
+        <section class="form2">
+          ${generateForm.generateTextField('Bookmark Description: ', 'bookmark-description', 'e.g. Favorite site')}
+          ${generateForm.generateNumberOption('Bookmark rating: ', 'bookmark-rating')}
+        </section>
+          <button class="submit" type="submit">Add bookmark</button>
+      </form>
+    </section>
   `)
 }
 

@@ -1,7 +1,7 @@
 import $ from 'jQuery'
 
 const items = [];
-let filter = $('#rating-filter').val()
+let filter = 1
 let error = null
 
 const findById = function (id) {
