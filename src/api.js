@@ -42,9 +42,7 @@ const createItem = function (title, url, description, rating) {
     });
   }
 const deleteItem = function (id) {
-    return apiFetch(`${BASE_URL}/${id}`, {
-        method: 'DELETE'
-    })
+    return apiFetch(`${BASE_URL}/${id}`, {method: 'DELETE'})
 }
 
 export default {

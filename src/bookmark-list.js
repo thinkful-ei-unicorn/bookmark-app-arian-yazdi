@@ -157,8 +157,8 @@ const handleDeleteItemClicked = function () {
     })
     .catch((error) => {
       console.log(error);
-      store.setError(error.message);
-      renderError();
+      if(error) { store.setError(error.message)};
+      renderError()
     });
   });
 };
@@ -166,6 +166,7 @@ const handleDeleteItemClicked = function () {
 const handleDescription = function() {
   $('.js-bookmark-list').on('click', '.description-toggle', event => {
     const id = getItemIdFromElement(event.currentTarget)
+    console.log(event.currentTarget)
     $(`.description${id}`).toggleClass('hidden')
   })
 }
