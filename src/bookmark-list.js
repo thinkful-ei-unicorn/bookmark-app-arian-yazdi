@@ -7,7 +7,7 @@ const generateItemElement = function (item) {
   let itemTitle = `<span class="bookmark-item bookmark-item__checked">${item.title}</span>`;
   let bookmarkRating = `<span class="bookmark-item bookmark-item__checked">${item.rating}/5</span>`
   let bookmarkDescription = `<p>${item.desc}</p>
-    <a href="url">${item.url}</a>`
+    <a href="${item.url}">${item.url}</a>`
   return `
     <li class="js-item-element" data-item-id="${item.id}">
       ${itemTitle}
