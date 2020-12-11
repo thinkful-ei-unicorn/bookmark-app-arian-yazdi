@@ -83,8 +83,13 @@ a:hover {
 }
 
 .error-container {
-  color: red;
+  background-color: red;
+  color: white;
   font-weight: bold;
+}
+
+.error-container h2 {
+  font-size: 20px;
 }
 
 .error-container * {
