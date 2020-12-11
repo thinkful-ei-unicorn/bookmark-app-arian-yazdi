@@ -29,7 +29,7 @@ const generateError = function (message) {
   return `
       <section class="error-content">
         <button id="cancel-error">X</button>
-        <p>${message}</p>
+        <h2>${message}</h2>
       </section>
     `;
 };

@@ -68,19 +68,28 @@ button:hover {
 
 .bookmark-list {
   display: block;
-  color: grey;
+  color: black;
   font-size: 20px;
   margin-bottom: 15px;
 }
 
 a {
   margin-bottom: 5px;
-  color: grey;
+  color: black;
+}
+
+a:hover {
+  color: blue;
 }
 
 .error-container {
-  color: red;
+  background-color: red;
+  color: white;
   font-weight: bold;
+}
+
+.error-container h2 {
+  font-size: 20px;
 }
 
 .error-container * {
